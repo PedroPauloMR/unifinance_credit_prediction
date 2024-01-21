@@ -3,3 +3,5 @@ mlflow ui --backend-store-uri sqlite:///mlflow.db
 export MLFLOW_TRACKING_URI=http://localhost:5000
 
 mlflow models serve --model-uri models:/modelo.joblib/production -p 5001 --no-conda
+
+mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://DB_USER:SENHA@IP_BANCO:PORT/DATABASE --default-artifact-root gs://NAME_CLOUD_STORAGE

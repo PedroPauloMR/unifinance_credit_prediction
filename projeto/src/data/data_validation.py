@@ -16,6 +16,7 @@ class DataValidation:
     def __init__(self) -> None:
         self.columns_to_use = load_config_file().get("columns_to_use")
 
+
     def check_shape_data(self, dataframe: pd.DataFrame) -> bool:
         try:
             logger.info("Initiating validation...")
@@ -25,7 +26,8 @@ class DataValidation:
             logger.error(f"Error on validation: {e}")
             return False
 
-    def chek_columns(self, dataframe: pd.DataFrame) -> bool:
+
+    def check_columns(self, dataframe: pd.DataFrame) -> bool:
         schema = DataFrameSchema(
             {
                 "target": Column(
@@ -54,8 +56,9 @@ class DataValidation:
             pandera.display(exc.failure_cases)
             return False
 
+
     def run(self, dataframe: pd.DataFrame) -> bool:
-        if self.check_shape_data(dataframe) and self.chek_columns(dataframe):
+        if self.check_shape_data(dataframe) and self.check_columns(dataframe):
             logger.info("Success on validate data")
             return True
         else:

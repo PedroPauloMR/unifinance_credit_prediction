@@ -31,10 +31,12 @@ class TrainModels:
         self.model_name = load_config_file().get("model_name")
         self.model = None
 
+
     def train(self, model):
         model.fit(self.dados_X, self.dados_y)
         self.model = model
         return model
+
 
     def get_best_model(self):
         logger.info("Obtaining the best model from MLFLOW...")
@@ -61,6 +63,7 @@ class TrainModels:
             "metrics.val_roc_auc"
         ]
         return df_best_params, best_roc_auc
+
 
     def run(self):
         df_best_params, _ = self.get_best_model()
@@ -105,6 +108,7 @@ class TrainModels:
                 input_example=self.dados_X.iloc[[0]],
                 registered_model_name=self.model_name,
             )
+
 
     def save_model(self):
         path = path_model_trained()
